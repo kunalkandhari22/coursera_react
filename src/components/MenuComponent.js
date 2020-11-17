@@ -1,6 +1,7 @@
 import React , { Component } from 'react';
 import { Media } from 'reactstrap';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
+import Dishdetail from './DishdetailComponent';
 
 class Menu extends Component {
     constructor(props) {
@@ -8,29 +9,37 @@ class Menu extends Component {
         this.state = {
             selectedDish: null
         };
+
+        // console.log('Menu contructor');
+
     }
+
+    // componentDidMount() {
+        
+    //     console.log('Menu componentDidMount');
+    // }
 
     onDishSelect(dish) {
         this.setState({ selectedDish: dish });
     }
 
-    renderDish(dish) {
-        if(dish != null) {
-            return (
-                <Card>
-                    <CardImg width="100%" src={dish.image} alt={dish.name} />
-                    <CardBody>
-                        <CardTitle heading>{dish.name}</CardTitle>
-                        <CardText>{dish.description}</CardText>
-                    </CardBody>                    
-                </Card>
-            );
-        } else {
-            return (
-                <div></div>
-            );
-        }
-    }
+    // renderDish(dish) {
+    //     if(dish != null) {
+    //         return (
+    //             <Card>
+    //                 <CardImg width="100%" src={dish.image} alt={dish.name} />
+    //                 <CardBody>
+    //                     <CardTitle>{dish.name}</CardTitle>
+    //                     <CardText>{dish.description}</CardText>
+    //                 </CardBody>                    
+    //             </Card>
+    //         );
+    //     } else {
+    //         return (
+    //             <div></div>
+    //         );
+    //     }
+    // }
 
     render() {
         
@@ -56,13 +65,15 @@ class Menu extends Component {
                 <div key={dish.id} className="col-12 col-md-5 m-1">
                     <Card onClick={() => this.onDishSelect(dish)}>
                         <CardImg width="100%" src={dish.image} alt={dish.name} />
-                        <CardImgOverlay body className="ml-5">
-                            <CardTitle heading>{dish.name}</CardTitle>
+                        <CardImgOverlay>
+                            <CardTitle>{dish.name}</CardTitle>
                         </CardImgOverlay>
                     </Card>
                 </div>
             );
         });
+
+        // console.log('Menu render');
 
         return (
             <div className="container">
@@ -74,9 +85,10 @@ class Menu extends Component {
                     {menu}
 
                 </div>
-                <div className="row">
+                {/* <div className="row">
                     {this.renderDish(this.state.selectedDish)}
-                </div>
+                </div> */}
+                <Dishdetail selectedDish={this.state.selectedDish} />
             </div>
         );
     }
